@@ -1,16 +1,89 @@
 ---
+import '../styles/global.css'
+import Certificado from '../components/Certificado.astro';
 
+// Datos de ejemplo (Simulando tu "Base de Datos")
+const misCertificados = [
+	{ titulo: "Google Cloud Computing Foundations Certificate", entidad: "Google Cloud", img: "/img/google-cloud-computing-foundations-certificate.png", link: "https://www.credly.com/badges/561ba8a3-b265-45aa-870e-6c867f2a3df2/public_url"},
+	{ titulo: "Google AI Essentials", entidad: "Coursera", img: "/img/google-ai-essentials.jpeg" },
+	{ titulo: "Learn JavaScript", entidad: "Scrimba", img: "/img/learn-javascript.png" },
+	{ titulo: "Learn Tailwind CSS", entidad: "Scrimba", img: "/img/learn-tailwind-css.png" },
+	{ titulo: "Learn HTML and CSS", entidad: "Scrimba", img: "/img/learn-html-and-css.png" },
+];
+
+const habilidades = [
+    "JavaScript", "Node.js", "Astro", "Tailwind", "Python", "SQL", "Docker", "Git"
+];
 ---
 
-<html lang="en">
+<html lang="es" class="scroll-smooth">
 	<head>
 		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
+		<title>Marcos | Full Stack Developer</title>
 	</head>
-	<body>
-		<h1>Astro</h1>
+	<body class="bg-slate-900 text-slate-200 font-sans antialiased selection:bg-sky-500 selection:text-white">
+        
+        <main class="max-w-6xl mx-auto px-4 py-10 lg:py-20">
+            
+            <header class="text-center mb-20">
+                <div class="inline-block mb-4 px-3 py-1 rounded-full border border-sky-500/30 bg-sky-500/10 text-sky-300 text-sm font-medium">
+                    Disponible para nuevos proyectos
+                </div>
+                <h1 class="text-5xl md:text-7xl font-extrabold text-white mb-6 tracking-tight">
+                    Hola, soy <span class="text-transparent bg-clip-text bg-linear-to-r from-sky-400 to-indigo-500">Marcos</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-slate-400 max-w-2xl mx-auto leading-relaxed">
+                    Ingeniero en TIC & Desarrollador Full Stack. <br>
+                    Transformando ideas complejas en código limpio y eficiente.
+                </p>
+                
+                <div class="flex justify-center gap-4 mt-8">
+                    <a href="https://github.com/marcos-saenz-a" target="_blank" class="px-6 py-3 rounded-lg bg-white text-slate-900 font-bold hover:bg-slate-200 transition-colors">
+                        GitHub
+                    </a>
+                    <a href="mailto:marcos.saenz.a@outlook.com" class="px-6 py-3 rounded-lg border border-slate-600 hover:border-sky-400 hover:text-sky-400 transition-colors">
+                        Contactar
+                    </a>
+                </div>
+            </header>
+
+            <section class="mb-24">
+                <h2 class="text-3xl font-bold text-white mb-8 flex items-center gap-3">
+                    <span class="text-sky-400">#</span> Stack Tecnológico
+                </h2>
+                <div class="flex flex-wrap gap-3">
+                    {habilidades.map((skill) => (
+                        <span class="px-4 py-2 rounded-lg bg-slate-800 border border-slate-700 text-slate-300 font-medium hover:border-sky-500 hover:text-sky-400 hover:shadow-lg transition-all cursor-default">
+                            {skill}
+                        </span>
+                    ))}
+                </div>
+            </section>
+
+            <section>
+                <h2 class="text-3xl font-bold text-white mb-4 flex items-center gap-3">
+                    <span class="text-sky-400">#</span> Certificaciones
+                </h2>
+                <p class="text-slate-400 mb-10 max-w-2xl">
+                    Validación constante de mis conocimientos técnicos a través de cursos intensivos y exámenes oficiales.
+                </p>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {misCertificados.map((cert) => (
+                        <Certificado 
+                            titulo={cert.titulo} 
+                            entidad={cert.entidad} 
+                            imagen={cert.img} 
+                        />
+                    ))}
+                </div>
+            </section>
+
+        </main>
+
+        <footer class="text-center py-10 text-slate-500 text-sm border-t border-slate-800 mt-20">
+            © {new Date().getFullYear()} Marcos. Construido con Astro & Tailwind CSS.
+        </footer>
 	</body>
 </html>

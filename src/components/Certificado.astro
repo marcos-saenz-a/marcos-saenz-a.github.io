@@ -1,0 +1,27 @@
+---
+const { titulo, entidad, imagen, link } = Astro.props;
+---
+
+<div class="group relative bg-slate-800 border border-slate-700 rounded-xl overflow-hidden hover:shadow-2xl hover:shadow-sky-500/20 transition-all duration-300 hover:-translate-y-2">
+    
+    <div class="aspect-video overflow-hidden">
+        <img 
+            src={imagen} 
+            alt={`Certificado de ${titulo}`} 
+            class="w-full h-full object-cover"
+            loading="lazy"
+        />
+    </div>
+
+    <div class="p-5">
+        <h3 class="text-xl font-bold text-white mb-2 leading-tight">
+            {titulo}
+        </h3>
+        <div class="flex items-center justify-between mt-4">
+            <span class="text-sm font-medium text-slate-400 uppercase tracking-wider">
+                {entidad}
+            </span>
+            <div class="w-2 h-2 rounded-full bg-sky-400 shadow-[0_0_10px_var(--color-sky-400)]"></div>
+        </div>
+    </div>
+</div>
