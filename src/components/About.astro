@@ -1,58 +1,57 @@
 ---
 const skills = [
-  { name: "JavaScript", percentage: "90%" },
-  { name: "TypeScript", percentage: "85%" },
-  { name: "React / Astro", percentage: "90%" },
-  { name: "Node.js", percentage: "80%" },
-  { name: "UI / UX", percentage: "75%" },
-  { name: "Bases de datos", percentage: "70%" },
+  { name: "Python", percentage: "85%" },
+  { name: "SQL", percentage: "80%" },
+  { name: "Node.js", percentage: "75%" },
+  { name: "Linux", percentage: "85%" },
+  { name: "Automatización", percentage: "80%" },
+  { name: "Docker", percentage: "70%" },
 ];
 ---
-<section id="sobre-mi" class="py-20 border-t border-slate-800/50">
-    <div class="mb-12">
+<section id="sobre-mi" class="py-10 sm:py-16 md:py-20 border-t border-slate-800/50">
+    <div class="mb-8 sm:mb-10 md:mb-12">
         <h2 class="text-xs font-bold tracking-widest text-slate-500 uppercase flex items-center gap-4 mb-2">
-            <span class="w-8 h-[1px] bg-slate-700"></span> SOBRE MÍ
+            <span class="w-8 h-px bg-slate-700"></span> SOBRE MÍ
         </h2>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 md:gap-16 items-center">
         <!-- Avatar Side -->
-        <div class="relative max-w-sm mx-auto w-full">
-            <div class="absolute inset-0 bg-gradient-to-tr from-purple-600/20 to-blue-500/20 rounded-full blur-[60px]"></div>
+        <div class="relative w-full max-w-xs sm:max-w-sm mx-auto flex-shrink-0">
+            <div class="absolute inset-0 bg-gradient-to-tr from-purple-600/20 to-blue-500/20 rounded-full blur-[40px] sm:blur-[60px]"></div>
             <div class="relative w-full aspect-square rounded-full border border-slate-700/50 bg-[#1a1a2e] overflow-hidden flex items-end justify-center shadow-[0_0_40px_rgba(30,30,50,0.5)]">
-                 <img src="/img/marcos-saenz-portfolio.jpg" alt="Marcos" class="w-full object-cover scale-110" onerror="this.src='https://api.dicebear.com/7.x/avataaars/svg?seed=Marcos&backgroundColor=1a1a2e'"/>
+                 <img src="/img/marcos-saenz.png" alt="Marcos" class="w-full object-cover scale-110" onerror="this.src='https://api.dicebear.com/7.x/avataaars/svg?seed=Marcos&backgroundColor=1a1a2e'"/>
             </div>
-            
             <!-- Floating connection lines context (decorative) -->
-            <svg class="absolute -inset-4 w-[calc(100%+2rem)] h-[calc(100%+2rem)] pointer-events-none opacity-20" viewBox="0 0 100 100">
+            <svg class="absolute -inset-2 sm:-inset-4 w-[calc(100%+1rem)] sm:w-[calc(100%+2rem)] h-[calc(100%+1rem)] sm:h-[calc(100%+2rem)] pointer-events-none opacity-20" viewBox="0 0 100 100">
                 <circle cx="50" cy="50" r="48" fill="none" stroke="currentColor" class="text-blue-500" stroke-width="0.5" stroke-dasharray="4 4" />
             </svg>
         </div>
 
         <!-- Info / Skills Side -->
-        <div>
-            <h3 class="text-3xl font-bold text-white mb-4 leading-tight">
-                Me llamo <span class="text-purple-400">Marcos</span><br/>y me encanta construir cosas para la web.
+        <div class="w-full">
+            <h3 class="text-2xl sm:text-3xl font-bold text-white mb-3 sm:mb-4 leading-tight">
+                Ingeniero en TI<br/><span class="text-purple-400">especializado en infraestructura</span> y automatización.
             </h3>
             
-            <p class="text-slate-400 mb-8 leading-relaxed">
-                Soy desarrollador full stack con enfoque en crear experiencias digitales excepcionales. Combino código limpio con diseño atractivo para construir soluciones que marcan la diferencia. 
+            <p class="text-slate-400 mb-6 sm:mb-8 leading-relaxed text-base sm:text-lg">
+                Ingeniero en Tecnologías de la Información con sólida experiencia en administración de infraestructura, automatización de procesos y desarrollo de soluciones escalables. He trabajado en múltiples industrias (manufacturera, química, textil y retail) implementando proyectos de redes, servidores y herramientas de automatización. Apasionado por diseñar sistemas eficientes y por la innovación tecnológica.
             </p>
 
-            <a href="#contacto" class="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-slate-800 text-white font-medium hover:bg-slate-700 transition-colors mb-12 border border-slate-700">
+            <a href="#contacto" class="inline-flex items-center justify-center px-5 py-2.5 sm:px-6 sm:py-3 rounded-lg bg-slate-800 text-white font-medium hover:bg-slate-700 transition-colors mb-8 sm:mb-12 border border-slate-700 text-sm sm:text-base">
                 Conocer más sobre mí
             </a>
 
-            <div class="mt-8">
-                <h4 class="text-lg font-semibold text-white mb-6">Habilidades</h4>
-                <div class="space-y-4">
+            <div class="mt-6 sm:mt-8">
+                <h4 class="text-base sm:text-lg font-semibold text-white mb-4 sm:mb-6">Habilidades</h4>
+                <div class="space-y-3 sm:space-y-4">
                     {skills.map(skill => (
                         <div>
-                            <div class="flex justify-between text-sm mb-1">
+                            <div class="flex justify-between text-xs sm:text-sm mb-0.5 sm:mb-1">
                                 <span class="text-slate-300 font-medium">{skill.name}</span>
                                 <span class="text-slate-500">{skill.percentage}</span>
                             </div>
-                            <div class="h-1.5 w-full bg-slate-800 rounded-full overflow-hidden">
+                            <div class="h-1 w-full bg-slate-800 rounded-full overflow-hidden">
                                 <div class="h-full bg-gradient-to-r from-purple-600 to-blue-500 rounded-full" style={`width: ${skill.percentage};`}></div>
                             </div>
                         </div>
