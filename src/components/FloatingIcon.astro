@@ -1,0 +1,29 @@
+---
+interface Props {
+  icon: string;
+  alt: string;
+  position: string;
+  rotation?: string;
+  animation?: string;
+}
+
+const {
+  icon,
+  alt,
+  position,
+  rotation = "",
+  animation = "",
+} = Astro.props;
+---
+
+<div
+  class={`absolute w-12 h-12 bg-[#1a1a2e] border border-slate-700 rounded-xl flex items-center justify-center ${position} ${rotation} ${animation}`}
+>
+  <img
+    src={icon}
+    alt={alt}
+    class="w-6 h-6"
+    loading="lazy"
+  />
+  <span class="sr-only">{alt}</span>
+</div>

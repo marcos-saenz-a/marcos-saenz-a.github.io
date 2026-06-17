@@ -1,4 +1,64 @@
 ---
+import FloatingIcon from "./FloatingIcon.astro";
+
+const techIcons = [
+  {
+    icon: "/img/floating/js.svg",
+    alt: "JavaScript",
+    position: "top-1/4 left-0",
+    rotation: "rotate-[-10deg]",
+    animation: "animate-[bounce_5s_infinite]"
+  },
+  {
+    icon: "/img/floating/docker.svg",
+    alt: "Docker",
+    position: "bottom-10 left-6",
+    rotation: "rotate-6",
+    animation: "animate-[bounce_7s_infinite_0.4s]"
+  },
+  {
+    icon: "/img/floating/python.svg",
+    alt: "Python",
+    position: "top-8 right-14",
+    rotation: "rotate-12",
+    animation: "animate-[bounce_8s_infinite_1s]"
+  },
+  {
+    icon: "/img/floating/gcp.svg",
+    alt: "Google Cloud",
+    position: "top-6 left-12",
+    rotation: "rotate-[-8deg]",
+    animation: "animate-[bounce_6s_infinite_0.8s]"
+  },
+  {
+    icon: "/img/floating/sql.svg",
+    alt: "SQL",
+    position: "bottom-1/4 left-20",
+    rotation: "rotate-10",
+    animation: "animate-[bounce_6s_infinite_0.5s]"
+  },
+  {
+    icon: "/img/floating/github.svg",
+    alt: "GitHub",
+    position: "top-22 right-4",
+    rotation: "rotate-[-5deg]",
+    animation: "animate-[bounce_7s_infinite_0.7s]"
+  },
+  {
+    icon: "/img/floating/n8n.svg",
+    alt: "n8n",
+    position: "top-1 right-25",
+    rotation: "rotate-[-5deg]",
+    animation: "animate-[bounce_7s_infinite_0.7s]"
+  },
+  {
+    icon: "/img/floating/ubuntu.svg",
+    alt: "Ubuntu",
+    position: "bottom-10 right-10",
+    rotation: "rotate-[-5deg]",
+    animation: "animate-[bounce_7s_infinite_0.7s]"
+  }
+];
 ---
 <section id="inicio" class="min-h-screen pt-20 pb-10 flex flex-col justify-center relative overflow-hidden">
     <div class="absolute top-4 right-4 flex gap-4">
@@ -42,35 +102,24 @@
             <!-- avatar (Placeholder for now) - container masks background visually -->
             <div class="relative w-64 h-64 md:w-80 md:h-80 z-10">
                 <!-- Avatar wrapped to visually remove background: circular mask + backdrop -->
-                <div class="w-full h-full rounded-full border border-slate-700/40 relative overflow-hidden flex items-center justify-center bg-transparent">
+                <div class="w-full h-full relative overflow-hidden flex items-center justify-center bg-transparent">
                     <!-- If you want a true transparent PNG, replace the image in /public/img with a PNG without background -->
-                    <img src="/img/marcos-saenz-portfolio.png" alt="Marcos Saenz Avatar" class="w-full h-full object-cover object-center scale-110 rounded-full" onerror="this.src='https://api.dicebear.com/7.x/avataaars/svg?seed=Marcos&backgroundColor=1a1a2e&scale=80'" aria-hidden="false"/>
+                    <img src="/img/marcos-saenz-portfolio.png" alt="Marcos Saenz Avatar" class="w-full h-full object-cover object-center" onerror="this.src='https://api.dicebear.com/7.x/avataaars/svg?seed=Marcos&backgroundColor=1a1a2e&scale=80'" aria-hidden="false"/>
                 </div>
             </div>
 
             <!-- floating tech icons -->
-            <div class="absolute top-1/4 left-0 w-12 h-12 bg-[#1a1a2e] border border-slate-700 rounded-xl flex items-center justify-center text-yellow-400 rotate-[-10deg] animate-[bounce_5s_infinite]">
-                <span class="font-bold">JS</span>
-            </div>
-            <!-- new floating icons -->
-            <div class="absolute top-6 left-12 w-12 h-12 bg-[#1a1a2e] border border-slate-700 rounded-xl flex items-center justify-center text-white rotate-[-8deg] animate-[bounce_6s_infinite_0.8s]">
-                <!-- n8n simple mark (text as fallback) -->
-                <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M12 2v6" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/></svg>
-                <span class="sr-only">n8n</span>
-            </div>
-            <div class="absolute bottom-1/4 right-0 w-12 h-12 bg-[#1a1a2e] border border-slate-700 rounded-xl flex items-center justify-center text-blue-400 rotate-[10deg] animate-[bounce_6s_infinite_0.5s]">
-                <span class="font-bold">TS</span>
-            </div>
-            <div class="absolute bottom-10 left-6 w-12 h-12 bg-[#1a1a2e] border border-slate-700 rounded-xl flex items-center justify-center text-cyan-300 rotate-[6deg] animate-[bounce_7s_infinite_0.4s]">
-                <!-- Docker whale simplified icon -->
-                <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 13c0 2 1.5 4 4 4h10c2.5 0 4-2 4-4v-1H3v1z"/></svg>
-                <span class="sr-only">Docker</span>
-            </div>
-            <div class="absolute top-8 right-14 w-12 h-12 bg-[#1a1a2e] border border-slate-700 rounded-xl flex items-center justify-center text-yellow-300 rotate-[12deg] animate-[bounce_8s_infinite_1s]">
-                <!-- Power BI simplified icon (bars) -->
-                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><rect x="3" y="7" width="3" height="10" rx="1"/><rect x="8" y="4" width="3" height="13" rx="1"/><rect x="13" y="10" width="3" height="7" rx="1"/><rect x="18" y="2" width="3" height="15" rx="1"/></svg>
-                <span class="sr-only">Power BI</span>
-            </div>
+            {
+            techIcons.map((item) => (
+                <FloatingIcon
+                icon={item.icon}
+                alt={item.alt}
+                position={item.position}
+                rotation={item.rotation}
+                animation={item.animation}
+                />
+            ))
+            }
         </div>
     </div>
 
