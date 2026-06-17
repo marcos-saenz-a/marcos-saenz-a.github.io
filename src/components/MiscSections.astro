@@ -1,0 +1,126 @@
+---
+const achievements = [
+    { title: "Hackathon Winner", desc: "1er lugar en Hackathon Nacional 2023", icon: "🏆" },
+    { title: "Proyecto Destacado", desc: "Seleccionado como proyecto destacado en DevFest 2023", icon: "🚀" },
+    { title: "Top Contributor", desc: "Reconocimiento por contribuciones en GitHub", icon: "⭐" },
+];
+
+const technologies = [
+    "JavaScript", "TypeScript", "React", "Astro", "Node.js", "Tailwind", "Git", "GitHub", "Docker", "PostgreSQL"
+]
+---
+<section class="py-20 border-t border-slate-800/50">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+        <!-- Logros -->
+        <div>
+            <div class="mb-8">
+                <h2 class="text-xs font-bold tracking-widest text-slate-500 uppercase flex items-center gap-4 mb-2">
+                    <span class="w-8 h-[1px] bg-slate-700"></span> 6. LOGROS
+                </h2>
+                <h3 class="text-2xl font-bold text-white mb-2">Reconocimientos,<br/>premios y hitos.</h3>
+            </div>
+            
+            <div class="space-y-4">
+                {achievements.map(ach => (
+                    <div class="flex items-start gap-3">
+                        <span class="text-xl">{ach.icon}</span>
+                        <div>
+                            <h4 class="font-bold text-white text-sm">{ach.title}</h4>
+                            <p class="text-xs text-slate-400 mt-1">{ach.desc}</p>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </div>
+
+        <!-- Demo Interactiva -->
+        <div class="bg-[#11111a] border border-slate-800 rounded-2xl p-8">
+            <div class="mb-6">
+                <h2 class="text-xs font-bold tracking-widest text-purple-400 uppercase flex items-center gap-2 mb-2">
+                    7. DEMO INTERACTIVA
+                </h2>
+                <h3 class="text-xl font-bold text-white mb-2">Adivina el número 🎯</h3>
+                <p class="text-sm text-slate-400">Tengo un número entre 1 y 100. ¿Puedes adivinarlo?</p>
+            </div>
+            
+            <div class="flex flex-col gap-4">
+                <div class="flex items-center gap-2">
+                    <input type="number" id="guessInput" placeholder="Escribe tu número..." class="w-full bg-[#0d0d0d] border border-slate-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-purple-500 text-sm">
+                    <button id="guessBtn" class="px-4 py-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg font-medium text-sm hover:from-purple-500 hover:to-blue-500 transition-colors shrink-0">
+                        Enviar
+                    </button>
+                </div>
+                <div id="guessResult" class="text-sm font-medium text-purple-400 h-5"></div>
+                <div class="flex justify-between text-xs text-slate-500 mt-2 border-t border-slate-800 pt-4">
+                    <span>Intentos: <strong id="guessCount" class="text-white">0</strong></span>
+                    <span>Mejor puntaje: <strong id="bestScore" class="text-white">-</strong></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Tech Stack row -->
+<section class="py-12 border-t border-slate-800/50">
+    <div class="mb-8">
+        <h2 class="text-xs font-bold tracking-widest text-slate-500 uppercase flex items-center gap-4 mb-8">
+            <span class="w-8 h-[1px] bg-slate-700"></span> TECNOLOGÍAS QUE USO
+        </h2>
+        
+        <div class="flex flex-wrap gap-4 items-center opacity-70 cursor-default">
+           {/* For simplicity we'll just show text badges if we don't have SVGs, but to match design we use styled badges */}
+           {technologies.map(tech => (
+               <span class="text-xl font-bold text-white/50 hover:text-white transition-colors">{tech}</span>
+           ))}
+        </div>
+    </div>
+</section>
+
+<script>
+    // Simple guessing game logic
+    let target = Math.floor(Math.random() * 100) + 1;
+    let attempts = 0;
+    
+    const input = document.getElementById('guessInput') as HTMLInputElement;
+    const btn = document.getElementById('guessBtn');
+    const result = document.getElementById('guessResult');
+    const countDisplay = document.getElementById('guessCount');
+    const bestDisplay = document.getElementById('bestScore');
+
+    let bestScoreCounter = localStorage.getItem('bestScore') ? parseInt(localStorage.getItem('bestScore')!) : Infinity;
+    if (bestScoreCounter !== Infinity) bestDisplay!.innerText = bestScoreCounter.toString();
+
+    btn?.addEventListener('click', () => {
+        if (!input.value) return;
+        const guess = parseInt(input.value);
+        attempts++;
+        countDisplay!.innerText = attempts.toString();
+
+        if (guess === target) {
+            result!.innerText = "¡Correcto! 🎉";
+            result!.className = "text-sm font-medium text-emerald-400 h-5";
+            if (attempts < bestScoreCounter) {
+                bestScoreCounter = attempts;
+                localStorage.setItem('bestScore', bestScoreCounter.toString());
+                bestDisplay!.innerText = bestScoreCounter.toString();
+            }
+            // reset
+            setTimeout(() => {
+                target = Math.floor(Math.random() * 100) + 1;
+                attempts = 0;
+                countDisplay!.innerText = "0";
+                result!.innerText = "¡Juego reiniciado!";
+                result!.className = "text-sm font-medium text-purple-400 h-5";
+                input.value = "";
+            }, 3000);
+        } else if (guess < target) {
+            result!.innerText = "Muy bajo ⬆️";
+            result!.className = "text-sm font-medium text-blue-400 h-5";
+        } else {
+            result!.innerText = "Muy alto ⬇️";
+            result!.className = "text-sm font-medium text-slate-400 h-5";
+        }
+        input.value = "";
+        input.focus();
+    });
+</script>

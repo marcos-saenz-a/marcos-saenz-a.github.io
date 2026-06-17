@@ -1,0 +1,62 @@
+---
+const projects = [
+    {
+        title: "TaskFlow",
+        description: "Aplicación de gestión de tareas con colaboración en tiempo real.",
+        image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        tags: ["React", "Node.js", "MongoDB"],
+        link: "#"
+    },
+    {
+        title: "DevBlog",
+        description: "Blog personal con Markdown, Astro y MDX.",
+        image: "https://images.unsplash.com/photo-1499750310107-5fef28a66643?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        tags: ["Astro", "MDX", "Tailwind"],
+        link: "#"
+    },
+    {
+        title: "E-commerce",
+        description: "Tienda online completa con carrito y pagos.",
+        image: "https://images.unsplash.com/photo-1557821552-17105176677c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        tags: ["Next.js", "Stripe", "PostgreSQL"],
+        link: "#"
+    }
+];
+---
+<section id="proyectos" class="py-20 border-t border-slate-800/50">
+    <div class="mb-12">
+        <h2 class="text-xs font-bold tracking-widest text-slate-500 uppercase flex items-center gap-4 mb-2">
+            <span class="w-8 h-[1px] bg-slate-700"></span> PROYECTOS DESTACADOS
+        </h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {projects.map(project => (
+            <div class="group bg-[#11111a] border border-slate-800 rounded-xl overflow-hidden hover:border-purple-500/50 transition-all flex flex-col h-full">
+                <div class="aspect-[16/9] w-full relative overflow-hidden bg-slate-800">
+                    <!-- using unsplash placeholders for projects -->
+                    <img src={project.image} alt={project.title} class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500" loading="lazy" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#11111a] via-[#11111a]/20 to-transparent"></div>
+                </div>
+                
+                <div class="p-6 flex-1 flex flex-col">
+                    <h3 class="text-xl font-bold text-white mb-2">{project.title}</h3>
+                    <p class="text-sm text-slate-400 mb-6 flex-1">{project.description}</p>
+                    
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        {project.tags.map(tag => (
+                            <span class="px-2 py-1 text-[10px] font-medium tracking-wider uppercase text-blue-300 bg-blue-500/10 border border-blue-500/20 rounded">
+                                {tag}
+                            </span>
+                        ))}
+                    </div>
+                    
+                    <a href={project.link} class="inline-flex items-center text-sm font-medium text-slate-300 hover:text-purple-400 transition-colors group/link w-fit">
+                        Ver proyecto 
+                        <svg class="w-4 h-4 ml-1 transform group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </a>
+                </div>
+            </div>
+        ))}
+    </div>
+</section>

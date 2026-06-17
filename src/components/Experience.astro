@@ -1,0 +1,112 @@
+---
+const experiences = [
+    {
+        company: "Empresa A",
+        role: "Desarrollador Full Stack",
+        period: "2023 - Actualidad",
+        description: "Aplicaciones web escalables con foco en rendimiento. Desarrollo integral de frontend y backend."
+    },
+    {
+        company: "Empresa B",
+        role: "Desarrollador Frontend",
+        period: "2022 - 2023",
+        description: "Interfaces modernas y experiencias de usuario atractivas utilizando React y Tailwind CSS."
+    },
+    {
+        company: "Empresa C",
+        role: "Practicante de Desarrollo",
+        period: "2021 - 2022",
+        description: "Soporte en desarrollo y mantenimiento de sistemas internos."
+    }
+];
+
+const education = [
+    {
+        title: "Ingeniería en Sistemas",
+        institution: "Universidad X",
+        period: "2019 - 2023",
+        icon: "M12 14l9-5-9-5-9 5 9 5z"
+    },
+    {
+        title: "Técnico en Programación",
+        institution: "Instituto Y",
+        period: "2017 - 2019",
+        icon: "M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
+    }
+];
+---
+<section id="experiencia" class="py-20 border-t border-slate-800/50">
+    <div class="mb-12">
+        <h2 class="text-xs font-bold tracking-widest text-slate-500 uppercase flex items-center gap-4 mb-2">
+            <span class="w-8 h-[1px] bg-slate-700"></span> EXPERIENCIA DESTACADA
+        </h2>
+    </div>
+
+    <!-- Horizontal Timeline for Experience -->
+    <div class="relative pt-8 pb-12 mb-12 hidden md:block">
+        <!-- Connecting Line -->
+        <div class="absolute top-10 left-6 right-6 h-[2px] bg-gradient-to-r from-purple-600 via-blue-500 to-slate-800"></div>
+        
+        <div class="grid grid-cols-3 gap-8 relative">
+            {experiences.map((exp, index) => (
+                <div class="relative pt-6">
+                    <div class="absolute top-[-10px] left-1/2 -translate-x-1/2 w-5 h-5 rounded-full bg-[#0d0d0d] border-4 border-purple-500 box-content z-10"></div>
+                    <div class="bg-[#11111a] border border-slate-800 rounded-xl p-6 hover:border-purple-500/50 transition-colors group relative overflow-hidden">
+                        <!-- subtle gradient background on hover -->
+                        <div class="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+                        <div class="flex items-center gap-3 mb-4 text-purple-400">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                            <h3 class="font-bold text-white text-lg">{exp.company}</h3>
+                        </div>
+                        <h4 class="text-sm font-semibold text-slate-300 mb-1">{exp.role}</h4>
+                        <span class="text-xs text-slate-500 mb-3 block">{exp.period}</span>
+                        <p class="text-sm text-slate-400 leading-relaxed">{exp.description}</p>
+                    </div>
+                </div>
+            ))}
+        </div>
+    </div>
+
+    <!-- Mobile Vertical Timeline -->
+    <div class="md:hidden space-y-6">
+         {experiences.map((exp) => (
+            <div class="bg-[#11111a] border border-slate-800 rounded-xl p-6 flex flex-col gap-2">
+                <div class="flex items-center gap-3 text-purple-400">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                    <h3 class="font-bold text-white text-lg">{exp.company}</h3>
+                </div>
+                <h4 class="text-sm font-semibold text-slate-300">{exp.role}</h4>
+                <span class="text-xs text-slate-500">{exp.period}</span>
+                <p class="text-sm text-slate-400 leading-relaxed">{exp.description}</p>
+            </div>
+         ))}
+    </div>
+</section>
+
+<!-- Education Section included below Experience -->
+<section id="estudios" class="py-12 border-t border-slate-800/50">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+        <div>
+            <div class="mb-8">
+                <h2 class="text-xs font-bold tracking-widest text-slate-500 uppercase flex items-center gap-4 mb-2">
+                    <span class="w-8 h-[1px] bg-slate-700"></span> 4. ESTUDIOS
+                </h2>
+                <h3 class="text-2xl font-bold text-white">Formación académica<br/>y constante aprendizaje.</h3>
+            </div>
+        </div>
+        
+        <div class="space-y-6">
+            {education.map(edu => (
+                <div class="flex gap-4">
+                    <div class="mt-1 w-10 h-10 rounded-full border border-slate-800 bg-[#11111a] flex items-center justify-center text-blue-400 shrink-0">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={edu.icon}></path></svg>
+                    </div>
+                    <div>
+                        <h4 class="text-base font-bold text-white">{edu.title}</h4>
+                        <div class="text-sm text-slate-400 mt-1">{edu.institution} <span class="mx-2">•</span> <span class="text-slate-500">{edu.period}</span></div>
+                    </div>
+                </div>
+            ))}
+        </div>
+    </div>
+</section>
