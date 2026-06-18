@@ -1,23 +1,22 @@
 ---
 const achievements = [
-    { title: "1er Lugar - Programación 2022", desc: "Concurso de Programación (Java - Nivel Básico)", icon: "🥇" },
-    { title: "1er Lugar - Programación 2023", desc: "Concurso de Programación (Python - Nivel Intermedio)", icon: "🥇" },
-    { title: "3er Lugar - Programación 2024", desc: "Concurso de Programación (Python - Nivel Avanzado)", icon: "🥉" },
+    { title: "1er Lugar - Programación 2022", desc: "Concurso de Programación (Java - Nivel Básico)", icon: "🥇", certificate: "./certificates/Concurso-2022.pdf" },
+    { title: "1er Lugar - Programación 2023", desc: "Concurso de Programación (Python - Nivel Intermedio)", icon: "🥇", certificate: "./certificates/Concurso-2023.pdf" },
+    { title: "3er Lugar - Programación 2024", desc: "Concurso de Programación (Python - Nivel Avanzado)", icon: "🥉", certificate: "./certificates/Concurso-2024.pdf" }
 ];
 
 const technologies = [
-    "Python", "SQL", "Node.js", "JavaScript", "Linux", "Docker", "PostgreSQL", "MongoDB", "GCP", "GitHub", "Automatización", "PowerBI"
+    "Python", "SQL", "Node.js", "JavaScript", "Linux", "Docker", "PostgreSQL", "MongoDB", "GCP", "GitHub", "PowerBI", "n8n", "Ubuntu", "Astro"
 ]
 ---
 <section class="py-20 border-t border-slate-800/50">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-        <!-- Logros -->
         <div>
             <div class="mb-8">
                 <h2 class="text-xs font-bold tracking-widest text-slate-500 uppercase flex items-center gap-4 mb-2">
                     <span class="w-8 h-[1px] bg-slate-700"></span> LOGROS
                 </h2>
-                <h3 class="text-2xl font-bold text-white mb-2">Reconocimientos,<br/>premios y hitos.</h3>
+                <h3 class="text-2xl font-bold text-white mb-2">Reconocimientos</h3>
             </div>
             
             <div class="space-y-4">
@@ -27,17 +26,21 @@ const technologies = [
                         <div>
                             <h4 class="font-bold text-white text-sm">{ach.title}</h4>
                             <p class="text-xs text-slate-400 mt-1">{ach.desc}</p>
+                            {ach.certificate && (
+                                <a href={ach.certificate} target="_blank" class="inline-block mt-2 px-3 py-1 text-xs text-purple-400 border border-purple-400 rounded hover:bg-purple-500/10 transition-colors">
+                                    Ver certificado
+                                </a>
+                            )}
                         </div>
                     </div>
                 ))}
             </div>
         </div>
 
-        <!-- Demo Interactiva -->
         <div class="bg-[#11111a] border border-slate-800 rounded-2xl p-8">
             <div class="mb-6">
                 <h2 class="text-xs font-bold tracking-widest text-purple-400 uppercase flex items-center gap-2 mb-2">
-                    DEMO INTERACTIVA
+                    Juguemos un poco
                 </h2>
                 <h3 class="text-xl font-bold text-white mb-2">Adivina el número 🎯</h3>
                 <p class="text-sm text-slate-400">Tengo un número entre 1 y 100. ¿Puedes adivinarlo?</p>
@@ -46,7 +49,7 @@ const technologies = [
             <div class="flex flex-col gap-4">
                 <div class="flex items-center gap-2">
                     <input type="number" id="guessInput" placeholder="Escribe tu número..." class="w-full bg-[#0d0d0d] border border-slate-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-purple-500 text-sm">
-                    <button id="guessBtn" class="px-4 py-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg font-medium text-sm hover:from-purple-500 hover:to-blue-500 transition-colors shrink-0">
+                    <button id="guessBtn" class="px-4 py-2 bg-linear-to-r from-purple-600 to-blue-600 text-white rounded-lg font-medium text-sm hover:from-purple-500 hover:to-blue-500 transition-colors shrink-0">
                         Enviar
                     </button>
                 </div>
@@ -68,7 +71,6 @@ const technologies = [
         </h2>
         
         <div class="flex flex-wrap gap-4 items-center opacity-70 cursor-default">
-           {/* For simplicity we'll just show text badges if we don't have SVGs, but to match design we use styled badges */}
            {technologies.map(tech => (
                <span class="text-xl font-bold text-white/50 hover:text-white transition-colors">{tech}</span>
            ))}
