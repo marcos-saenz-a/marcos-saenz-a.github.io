@@ -1,0 +1,120 @@
+---
+import Certificado from './Certificado.astro';
+
+const misCertificados = [
+	{ titulo: "Google Cloud Computing Foundations", entidad: "Google Cloud", img: "/img/google-cloud-computing-foundations-certificate.png", link: "https://www.credly.com/badges/561ba8a3-b265-45aa-870e-6c867f2a3df2/public_url"},
+	{ titulo: "Google AI Essentials", entidad: "Google", img: "/img/google-ai-essentials.jpeg", link: "https://www.coursera.org/account/accomplishments/verify/V0FFVCZRR4E5" },
+	{ titulo: "Learn Tailwind CSS", entidad: "Scrimba", img: "/img/learn-tailwind-css.png", link: "https://scrimba.com/@marcos-saenz-a:certs;cert2JbLs3qgBFHryrhmvMuRRrg6Pz3S2p4oqW1APe" },
+	{ titulo: "Learn HTML and CSS", entidad: "Scrimba", img: "/img/learn-html-and-css.png", link: "https://scrimba.com/@marcos-saenz-a:certs;cert24zAwPPowRzHm9YSaqgbxnqyT1Xdr67U4C8tG" },
+	{ titulo: "Learn JavaScript", entidad: "Scrimba", img: "/img/learn-javascript.png", link: "https://scrimba.com/@marcos-saenz-a:certs;cert24zAwPPowRzHm9YSaqgbxnsTk8pB1psk5RXs2" },
+];
+---
+
+<section id="certificados" class="py-20 border-t border-slate-800/50">
+    <div class="mb-12">
+        <h2 class="text-xs font-bold tracking-widest text-slate-500 uppercase flex items-center gap-4 mb-2">
+            <span class="w-8 h-px bg-slate-700"></span> CERTIFICADOS
+        </h2>
+        <h3 class="text-2xl font-bold text-white mb-8">Certificaciones y<br/>cursos importantes.</h3>
+    </div>
+
+    <div class="flex flex-wrap gap-4">
+        {misCertificados.map((cert) => (
+            <Certificado 
+                titulo={cert.titulo} 
+                entidad={cert.entidad} 
+                imagen={cert.img}
+                link={cert.link}
+            />
+        ))}
+    </div>
+</section>
+
+<!-- Modal Structure -->
+<div id="certificate-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 z-[100] opacity-0 invisible transition-all duration-300">
+    <div id="modal-content" class="bg-[#11111a] border border-slate-700 rounded-xl shadow-2xl shadow-purple-500/10 w-full max-w-3xl max-h-[90vh] flex flex-col transform scale-95 transition-transform duration-300">
+        <div class="p-4 border-b border-slate-700 flex justify-between items-center">
+            <div>
+                <h4 id="modal-title" class="font-bold text-white"></h4>
+                <p id="modal-entity" class="text-sm text-slate-400"></p>
+            </div>
+            <button id="modal-close" class="w-8 h-8 rounded-full text-slate-400 hover:bg-slate-800 hover:text-white transition-colors">&times;</button>
+        </div>
+        <div class="p-4 flex-1 overflow-auto">
+            <img id="modal-image" src="" alt="Certificado" class="w-full h-auto rounded-md"/>
+        </div>
+        <div class="p-4 border-t border-slate-700 text-center">
+            <a id="modal-link" href="#" target="_blank" rel="noopener noreferrer" class="text-sm text-purple-400 hover:underline hidden">
+                Verificar certificado
+            </a>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const modal = document.getElementById('certificate-modal');
+        const modalContent = document.getElementById('modal-content');
+        const modalImage = document.getElementById('modal-image');
+        const modalTitle = document.getElementById('modal-title');
+        const modalLink = document.getElementById('modal-link');
+        const modalEntity = document.getElementById('modal-entity');
+        const closeModalBtn = document.getElementById('modal-close');
+        const certificateCards = document.querySelectorAll('.certificate-card');
+
+        function openModal(imageSrc, title, link, entity) {
+            if (!modal || !modalImage || !modalTitle || !modalLink || !modalEntity) return;
+            
+            modalImage.src = imageSrc;
+            modalTitle.innerText = title;
+            modalEntity.innerText = entity;
+
+            if (link && link !== '#') {
+                modalLink.href = link;
+                modalLink.classList.remove('hidden');
+            } else {
+                modalLink.classList.add('hidden');
+            }
+
+            modal.classList.remove('invisible', 'opacity-0');
+            modalContent.classList.remove('scale-95');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
+
+        function closeModal() {
+            if (!modal) return;
+            modal.classList.add('opacity-0');
+            modalContent.classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('invisible');
+                document.body.style.overflow = ''; // Restore scrolling
+            }, 300); // Match transition duration
+        }
+
+        certificateCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const imageSrc = card.dataset.image;
+                const title = card.dataset.title;
+                const link = card.dataset.link;
+                const entity = card.dataset.entidad;
+                openModal(imageSrc, title, link, entity);
+            });
+        });
+
+        closeModalBtn?.addEventListener('click', closeModal);
+
+        // Close modal on background click
+        modal?.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !modal.classList.contains('invisible')) {
+                closeModal();
+            }
+        });
+    });
+</script>

@@ -13,8 +13,8 @@ const techIcons = [
     icon: "/img/floating/docker.svg",
     alt: "Docker",
     position: "bottom-1/12 left-1/7",
-    rotation: "rotate-6",
-    animation: "animate-[bounce_7s_infinite_0.4s]"
+    rotation: "rotate-[-6deg]",
+    animation: "animate-[bounce_7s_infinite_0.2s]"
   },
   {
     icon: "/img/floating/python.svg",
@@ -48,23 +48,23 @@ const techIcons = [
     icon: "/img/floating/n8n.svg",
     alt: "n8n",
     position: "top-2 right-1/4",
-    rotation: "rotate-[-5deg]",
+    rotation: "rotate-[5deg]",
     animation: "animate-[bounce_7s_infinite_0.7s]"
   },
   {
     icon: "/img/floating/ubuntu.svg",
     alt: "Ubuntu",
     position: "bottom-10 right-1/10",
-    rotation: "rotate-[-5deg]",
+    rotation: "rotate-[5deg]",
     animation: "animate-[bounce_7s_infinite_0.7s]"
   }
 ];
 ---
 <section id="inicio" class="min-h-screen pt-20 pb-10 flex flex-col justify-center relative overflow-hidden">
     <div class="absolute top-4 right-4 flex gap-4">
-        <a href="/Marcos-Saenz-CV.pdf" target="_blank" rel="noopener noreferrer" download class="flex items-center gap-2 px-4 py-2 bg-[#1a1a2e] border border-slate-700 rounded-lg text-sm text-slate-300 hover:text-white transition-colors" aria-label="Descargar CV">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-            Descargar CV
+        <a href="https://api.whatsapp.com/send?phone=522227958793&text=Hola%20Marcos,%20vi%20tu%20portafolio%20y%20me%20gustaría%20ponerme%20en%20contacto." target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 px-4 py-2 bg-[#1a1a2e] border border-slate-700 rounded-lg text-sm text-slate-300 hover:text-white transition-colors" aria-label="Contactar por WhatsApp">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.52 3.48A11.9 11.9 0 0012 0C5.373 0 .053 5.32.053 11.947c0 2.103.547 4.162 1.59 5.99L0 24l6.285-1.63A11.9 11.9 0 0012 24c6.627 0 11.947-5.32 11.947-11.947 0-3.19-1.244-6.18-3.427-8.573zM12 21.5c-1.77 0-3.51-.46-5.02-1.33l-.36-.21-3.73.97.99-3.63-.24-.37A9.46 9.46 0 012.55 11.95C2.55 7.09 6.14 3.5 11 3.5c2 0 3.9.78 5.32 2.2 1.4 1.4 2.2 3.33 2.2 5.3 0 5.36-4.63 9.48-9.52 9.48z"></path></svg>
+            WhatsApp
         </a>
     </div>
 
@@ -80,16 +80,16 @@ const techIcons = [
             </h1>
             
             <p class="text-lg text-slate-400 mb-8 max-w-xl leading-relaxed">
-                Ingeniero en Tecnologías de la Información con experiencia en infraestructura, automatización y desarrollo web. Especializado en diseñar e implementar soluciones TI escalables, desde redes y servidores hasta aplicaciones web modernas.
+                Ingeniero en Tecnologías de la Información y Comunicaciones con experiencia en infraestructura, automatización y desarrollo web. Especializado en diseñar e implementar soluciones TI escalables, desde redes y servidores hasta aplicaciones web modernas.
             </p>
             
             <div class="flex flex-wrap gap-4">
                 <a href="#proyectos" class="px-6 py-3 rounded-lg bg-linear-to-r from-purple-600 to-blue-600 text-white font-medium hover:from-purple-500 hover:to-blue-500 transition-all shadow-[0_0_20px_rgba(124,58,237,0.3)]">
                     Ver mi trabajo
                 </a>
-                <a href="#sobre-mi" class="px-6 py-3 rounded-lg border border-slate-700 text-slate-300 font-medium hover:bg-slate-800 hover:text-white transition-all flex items-center gap-2">
-                    Conocer más
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+                <a href="/Marcos-Saenz-CV.pdf" download="Marcos-Saenz-CV.pdf" target="_blank" rel="noopener noreferrer" class="px-6 py-3 rounded-lg border border-slate-700 text-slate-300 font-medium hover:bg-slate-800 hover:text-white transition-all flex items-center gap-2">
+                    Descargar CV
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                 </a>
             </div>
         </div>

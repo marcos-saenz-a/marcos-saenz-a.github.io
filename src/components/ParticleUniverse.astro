@@ -1,0 +1,160 @@
+---
+---
+<canvas id="particle-universe" class="fixed top-0 left-0 w-full h-full -z-10"></canvas>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    const canvas = document.getElementById('particle-universe');
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    let shootingStars = [];
+    let mouse = { x: null, y: null, radius: 100 };
+
+    function setCanvasSize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+
+    window.addEventListener('resize', () => {
+        setCanvasSize();
+        init();
+    });
+
+    window.addEventListener('mousemove', (event) => {
+        mouse.x = event.x;
+        mouse.y = event.y;
+    });
+    
+    window.addEventListener('mouseout', () => {
+        mouse.x = null;
+        mouse.y = null;
+    });
+
+    class Particle {
+        constructor(x, y, directionX, directionY, size) {
+            this.x = x;
+            this.y = y;
+            this.originX = x;
+            this.originY = y;
+            this.directionX = directionX;
+            this.directionY = directionY;
+            this.size = size;
+            this.baseOpacity = Math.random() * 0.3 + 0.2; // More subtle
+            this.opacity = this.baseOpacity;
+            this.twinkleSpeed = Math.random() * 0.006 + 0.002;
+        }
+
+        draw() {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+            ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
+            ctx.fill();
+        }
+
+        update() {
+            // Wall collision
+            if (this.x > canvas.width || this.x < 0) this.directionX = -this.directionX;
+            if (this.y > canvas.height || this.y < 0) this.directionY = -this.directionY;
+
+            // Mouse repulsion
+            let dx = mouse.x - this.x;
+            let dy = mouse.y - this.y;
+            let distance = Math.sqrt(dx * dx + dy * dy);
+
+            if (distance < mouse.radius) {
+                const forceDirectionX = dx / distance;
+                const forceDirectionY = dy / distance;
+                const force = (mouse.radius - distance) / mouse.radius;
+                this.x -= forceDirectionX * force * 3;
+                this.y -= forceDirectionY * force * 3;
+            } else {
+                // Return to original position slowly or just move normally
+                this.x += this.directionX;
+                this.y += this.directionY;
+            }
+
+            // Twinkling effect
+            this.opacity = this.baseOpacity + Math.sin(Date.now() * this.twinkleSpeed) * (this.baseOpacity * 0.2);
+
+            this.draw();
+        }
+    }
+    
+    class ShootingStar {
+        constructor() {
+            this.reset();
+        }
+
+        reset() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height * 0.5; // Start from top half
+            this.len = Math.random() * 80 + 20;
+            this.speed = Math.random() * 8 + 8;
+            this.angle = Math.random() * 0.4 + 0.4; // Angle downwards
+            this.life = 0;
+            this.maxLife = Math.random() * 70 + 50;
+            this.active = true;
+        }
+
+        draw() {
+            if (!this.active) return;
+            ctx.beginPath();
+            ctx.moveTo(this.x, this.y);
+            ctx.lineTo(this.x - this.len * Math.cos(this.angle), this.y - this.len * Math.sin(this.angle));
+            const opacity = 1 - this.life / this.maxLife;
+            
+            const gradient = ctx.createLinearGradient(this.x, this.y, this.x - this.len * Math.cos(this.angle), this.y - this.len * Math.sin(this.angle));
+            gradient.addColorStop(0, `rgba(255, 255, 255, ${opacity})`);
+            gradient.addColorStop(1, `rgba(255, 255, 255, 0)`);
+
+            ctx.strokeStyle = gradient;
+            ctx.lineWidth = 2;
+            ctx.stroke();
+        }
+
+        update() {
+            if (!this.active) return;
+            this.x += this.speed * Math.cos(this.angle);
+            this.y += this.speed * Math.sin(this.angle);
+            this.life++;
+            if (this.life >= this.maxLife || this.x > canvas.width || this.y > canvas.height) {
+                this.active = false;
+            }
+            this.draw();
+        }
+    }
+
+    function init() {
+        particles = [];
+        let numberOfParticles = (canvas.height * canvas.width) / 12000;
+        for (let i = 0; i < numberOfParticles; i++) {
+            let size = Math.random() * 1.2 + 0.3;
+            let x = Math.random() * canvas.width;
+            let y = Math.random() * canvas.height;
+            let directionX = (Math.random() * .2) - .1;
+            let directionY = (Math.random() * .2) - .1;
+            particles.push(new Particle(x, y, directionX, directionY, size));
+        }
+        shootingStars = [];
+    }
+
+    function animate() {
+        requestAnimationFrame(animate);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        particles.forEach(p => p.update());
+        
+        if (Math.random() < 0.005 && shootingStars.filter(s => s.active).length < 2) {
+            shootingStars.push(new ShootingStar());
+        }
+        
+        shootingStars.forEach((star, index) => star.active ? star.update() : shootingStars.splice(index, 1));
+    }
+
+    setCanvasSize();
+    init();
+    animate();
+  });
+</script>
