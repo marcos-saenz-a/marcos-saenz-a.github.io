@@ -41,9 +41,9 @@
             this.directionX = directionX;
             this.directionY = directionY;
             this.size = size;
-            this.baseOpacity = Math.random() * 0.3 + 0.2; // More subtle
+            this.baseOpacity = Math.random() * 0.9 + 0.5; // More subtle
             this.opacity = this.baseOpacity;
-            this.twinkleSpeed = Math.random() * 0.006 + 0.002;
+            this.twinkleSpeed = Math.random() * 0.008 + 0.002;
         }
 
         draw() {
@@ -76,7 +76,7 @@
             }
 
             // Twinkling effect
-            this.opacity = this.baseOpacity + Math.sin(Date.now() * this.twinkleSpeed) * (this.baseOpacity * 0.2);
+            this.opacity = this.baseOpacity + Math.sin(Date.now() * this.twinkleSpeed) * (this.baseOpacity * 0.6);
 
             this.draw();
         }
@@ -130,7 +130,7 @@
         particles = [];
         let numberOfParticles = (canvas.height * canvas.width) / 12000;
         for (let i = 0; i < numberOfParticles; i++) {
-            let size = Math.random() * 1.2 + 0.3;
+            let size = Math.random() * 1.4 + 0.4;
             let x = Math.random() * canvas.width;
             let y = Math.random() * canvas.height;
             let directionX = (Math.random() * .2) - .1;

@@ -1,58 +1,68 @@
 ---
-import FloatingIcon from "./FloatingIcon.astro";
+import { Image } from 'astro:assets';
+import heroImage from '../assets/marcos-saenz-portafolio.png';
+
+import jsIcon from '../assets/floating/js.svg';
+import dockerIcon from '../assets/floating/docker.svg';
+import pythonIcon from '../assets/floating/python.svg';
+import gcpIcon from '../assets/floating/gcp.svg';
+import sqlIcon from '../assets/floating/sql.svg';
+import githubIcon from '../assets/floating/github.svg';
+import n8nIcon from '../assets/floating/n8n.svg';
+import ubuntuIcon from '../assets/floating/ubuntu.svg';
 
 const techIcons = [
   {
-    icon: "/img/floating/js.svg",
+    icon: jsIcon,
     alt: "JavaScript",
     position: "top-1/4 left-1/12",
     rotation: "rotate-[-10deg]",
     animation: "animate-[bounce_5s_infinite]"
   },
   {
-    icon: "/img/floating/docker.svg",
+    icon: dockerIcon,
     alt: "Docker",
     position: "bottom-1/12 left-1/7",
     rotation: "rotate-[-6deg]",
     animation: "animate-[bounce_7s_infinite_0.2s]"
   },
   {
-    icon: "/img/floating/python.svg",
+    icon: pythonIcon,
     alt: "Python",
     position: "top-10 right-1/6",
     rotation: "rotate-12",
     animation: "animate-[bounce_8s_infinite_1s]"
   },
   {
-    icon: "/img/floating/gcp.svg",
+    icon: gcpIcon,
     alt: "Google Cloud",
     position: "top-1/16 left-1/4",
     rotation: "rotate-[-8deg]",
     animation: "animate-[bounce_6s_infinite_0.8s]"
   },
   {
-    icon: "/img/floating/sql.svg",
+    icon: sqlIcon,
     alt: "SQL",
     position: "bottom-1/3 left-1/8",
     rotation: "rotate-10",
     animation: "animate-[bounce_6s_infinite_0.5s]"
   },
   {
-    icon: "/img/floating/github.svg",
+    icon: githubIcon,
     alt: "GitHub",
     position: "top-1/2 right-1/8",
     rotation: "rotate-[-5deg]",
     animation: "animate-[bounce_7s_infinite_0.7s]"
   },
   {
-    icon: "/img/floating/n8n.svg",
+    icon: n8nIcon,
     alt: "n8n",
     position: "top-2 right-1/4",
     rotation: "rotate-[5deg]",
     animation: "animate-[bounce_7s_infinite_0.7s]"
   },
   {
-    icon: "/img/floating/ubuntu.svg",
+    icon: ubuntuIcon,
     alt: "Ubuntu",
     position: "bottom-10 right-1/10",
     rotation: "rotate-[5deg]",
@@ -76,7 +86,7 @@ const techIcons = [
             </div>
             
             <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white mb-6 leading-tight tracking-tight">
-                Soluciones <span class="text-transparent bg-clip-text bg-linear-to-r from-purple-400 to-blue-500">tecnológicas </span> escalables.
+                Soluciones <span class="text-transparent bg-clip-text bg-linear-to-r from-purple-400 to-blue-500">tecnológicas</span><br /><span id="typing-text"></span><span class="typing-cursor text-slate-300">|</span>.
             </h1>
             
             <p class="text-lg text-slate-400 mb-8 max-w-xl leading-relaxed">
@@ -99,22 +109,75 @@ const techIcons = [
             <div class="absolute w-[85%] max-w-[420px] aspect-square rounded-full border border-purple-500/20 rotate-60 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
             <div class="absolute w-[110%] max-w-[520px] aspect-square rounded-full border border-blue-500/10 rotate-[-30deg] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
             {
-            techIcons.map((item) => (
-                <FloatingIcon
-                icon={item.icon}
-                alt={item.alt}
-                position={item.position}
-                rotation={item.rotation}
-                animation={item.animation}
-                />
-            ))
+                techIcons.map((item) => (
+                    <div class={`absolute z-0 ${item.position} ${item.rotation} ${item.animation}`}>
+                        <Image 
+                            src={item.icon} 
+                            alt={item.alt}
+                            width={48}
+                            height={48}
+                            loading="eager"
+                            class="w-10 h-10 md:w-12 md:h-12"
+                        />
+                    </div>
+                ))
             }
             
             <div class="relative w-64 h-64 md:w-80 md:h-80 z-10">
                 <div class="w-full h-full relative overflow-hidden flex items-center justify-center">
-                    <img src="/img/marcos-saenz-portafolio.png" alt="Marcos Saenz Avatar" class="w-full h-full object-cover object-center" style="mask-image: linear-gradient(to bottom, black 95%, transparent 100%); -webkit-mask-image: linear-gradient(to bottom, black 95%, transparent 100%);" onerror="this.src='https://api.dicebear.com/7.x/avataaars/svg?seed=Marcos&backgroundColor=1a1a2e&scale=80'" aria-hidden="false"/>
+                    <Image src={heroImage} loading="eager" alt="Marcos Saenz Avatar" class="w-full h-full object-cover object-center" style="mask-image: linear-gradient(to bottom, black 95%, transparent 100%); -webkit-mask-image: linear-gradient(to bottom, black 95%, transparent 100%);" onerror="this.src='https://api.dicebear.com/7.x/avataaars/svg?seed=Marcos&backgroundColor=1a1a2e&scale=80'" aria-hidden="false"/>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+<style>
+    .typing-cursor {
+        animation: blink 0.7s infinite;
+    }
+
+    @keyframes blink {
+        50% {
+            opacity: 0;
+        }
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const typingTextElement = document.getElementById('typing-text');
+        if (!typingTextElement) return;
+
+        const words = ["innovadoras", "escalables", "eficientes", "seguras"];
+        let wordIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typingSpeed = 150;
+        const deletingSpeed = 75;
+        const delayBetweenWords = 2000;
+
+        function type() {
+            const currentWord = words[wordIndex];
+            
+            if (isDeleting) {
+                typingTextElement.textContent = currentWord.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typingTextElement.textContent = currentWord.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            if (!isDeleting && charIndex === currentWord.length) {
+                setTimeout(() => isDeleting = true, delayBetweenWords);
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                wordIndex = (wordIndex + 1) % words.length;
+            }
+
+            setTimeout(type, isDeleting ? deletingSpeed : typingSpeed);
+        }
+
+        type();
+    });
+</script>
